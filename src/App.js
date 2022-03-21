@@ -9,10 +9,14 @@ import PaymentDetails from  './components/Payment/PaymentDetails';
 
 
 import {BrowserRouter as Router, Route} from "react-router-dom";
+import Header from './components/Header';
+import Footer from './components/Footer';
 function App() {
   return (
     <Router>
     <div >
+      
+      
 
    
      <Route path="/travelpackage/admin/add" exact component ={CreatePackage}></Route>
@@ -22,6 +26,7 @@ function App() {
      <Route path="/confirm/payment/" exact component={PaymentConfirm}/>
      <Route path="/payment/view/" exact component={PaymentView}/>
      <Route path="/payment/details/:id" exact component={PaymentDetails}/>
+   
     
 
 

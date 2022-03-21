@@ -3,7 +3,8 @@ import axios from "axios";
 import '../../Styles/Payment.css'
 import { Form,Button,Col,Row,InputGroup } from "react-bootstrap";
 import { reference } from '@popperjs/core';
-import Header from '../Header';
+import Header from'../Header';
+import Footer from '../Footer';
 
 export default class PayForTravelPackage extends Component{
 
@@ -141,7 +142,7 @@ window.location.replace("/confirm/payment")
     const{packageName,price,payf,method,img,tdate,noofD,noofN}=this.state;
    return(
      <div>
-       <Header/>
+      <Header/>
      
      <div className="info">
 
@@ -311,7 +312,7 @@ window.location.replace("/confirm/payment")
     <div> </div>
 </div>
      </div>
-    
+    <Footer/>
      </div>
    )
  }

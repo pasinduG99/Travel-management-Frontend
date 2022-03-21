@@ -1,6 +1,6 @@
 import React from "react";
 import "../Styles/HeaderFooter.css";
-import img1 from '../Images/logoo.png'
+
 
 function Header() {
   return (
@@ -65,11 +65,10 @@ function Header() {
           <div>
           <div id="logott">
               
-              <img src={img1} style={{width:"200px",height:"100px"}}/> 
              
            </div>
             <div id="hname">
-              <h1><b> Dream Travelers</b></h1> 
+              <h1><b> Leisure Travelers</b></h1> 
             </div>
 
 

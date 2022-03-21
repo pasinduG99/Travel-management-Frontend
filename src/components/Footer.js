@@ -31,9 +31,7 @@ function Footer() {
             <h4>Services</h4>
             <h6 className="list-unstyled">
               <li><a href="/travelpackages" >Trip Packages</a> </li>
-              <li><a href="/hotelpackage" >Rooms Packages</a></li>
-              <li><a href="/all" >Activity</a></li>
-              <li><a href="/equipment" >Equipments</a></li>
+             
             </h6>
           </div>
         </div>
@@ -63,7 +61,7 @@ function Footer() {
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <br />
             <br />
-            &copy;{new Date().getFullYear()} Dream Travelers | All rights
+            &copy;{new Date().getFullYear()} Leisure Travelers | All rights
             reserved | Terms Of Service | Privacy
           </p>
 
