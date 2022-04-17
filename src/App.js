@@ -7,7 +7,9 @@ import PaymentConfirm from './components/Payment/PaymentComplete';
 import PaymentView from './components/Payment/PayView';
 import PaymentDetails from  './components/Payment/PaymentDetails';
 
-
+import Add_Inquiry from "./components/Inquiry/Add_Inquiry";
+import viewInquiry from "./components/Inquiry/View_Inquiry";
+import editInquiry from "./components/Inquiry/Edit_Inquiry";
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -28,7 +30,9 @@ function App() {
      <Route path="/payment/view/" exact component={PaymentView}/>
      <Route path="/payment/details/:id" exact component={PaymentDetails}/>
    
-    
+     <Route path="/addInquiry" exact component={Add_Inquiry}/>
+<Route path="/viewInquiry" exact component={viewInquiry}/>
+<Route path="/editInquiry" exact component={editInquiry}/>  
 
 
 </div>

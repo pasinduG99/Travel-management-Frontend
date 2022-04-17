@@ -1,0 +1,27 @@
+.btn-primary-doc {
+  background-color: #3f25d7;
+  border: none;
+  color: rgb(17, 16, 16);
+  padding: 10px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 4px;
+  cursor: pointer;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.frameAdd{
+  margin-top: 200px;
+  margin-left: 300px;
+}
+
+.inqaddbtn{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 200px;
+  padding: 5px, 5px, 5px, 5px;
+  background-color: darkgrey;
+  color: white;
+}

@@ -37,7 +37,7 @@ function Header() {
           
           
           <li>
-            <a href="/add" style={{ textDecoration: "none", color: "white" }}>
+            <a href="/viewInquiry" style={{ textDecoration: "none", color: "white" }}>
               <i class="fas fa-exclamation-circle"></i>Inquiry
             </a>
           </li>
