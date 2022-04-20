@@ -6,6 +6,7 @@ import PayForTP from './components/Payment/PayForTP';
 import PaymentConfirm from './components/Payment/PaymentComplete';
 import PaymentView from './components/Payment/PayView';
 import PaymentDetails from  './components/Payment/PaymentDetails';
+import EditPayment from './components/Payment/EditPayment';
 
 import Add_Inquiry from "./components/Inquiry/Add_Inquiry";
 import viewInquiry from "./components/Inquiry/View_Inquiry";
@@ -29,7 +30,7 @@ function App() {
      <Route path="/confirm/payment/" exact component={PaymentConfirm}/>
      <Route path="/payment/view/" exact component={PaymentView}/>
      <Route path="/payment/details/:id" exact component={PaymentDetails}/>
-   
+     <Route path="/payment/edit/:id" exact component={EditPayment}/>
      <Route path="/addInquiry" exact component={Add_Inquiry}/>
 <Route path="/viewInquiry" exact component={viewInquiry}/>
 <Route path="/editInquiry" exact component={editInquiry}/>  
