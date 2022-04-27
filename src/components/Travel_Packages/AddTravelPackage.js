@@ -1,8 +1,8 @@
 import React, { useReducer, useState } from "react";
 import { useHistory } from "react-router-dom";
-import "../../Styles/TravelPackage.css";
 import axios from "axios";
-
+import "../../Styles/TravelPackage.css";
+import HeaderAdmin from "../HeaderAdmin";
 
 
 const CreatePackage = () => {
@@ -58,7 +58,7 @@ const CreatePackage = () => {
   };
   return (
     <div>
-      
+      <HeaderAdmin/>
 
       <div className="infoadmin">
         <div className="bodyaa" id="bodytbc">
