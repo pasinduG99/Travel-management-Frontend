@@ -7,7 +7,7 @@ import PaymentConfirm from './components/Payment/PaymentComplete';
 import PaymentView from './components/Payment/PayView';
 import PaymentDetails from  './components/Payment/PaymentDetails';
 import EditPayment from './components/Payment/EditPayment';
-
+import HomePage from './components/Home/HomePage';
 import Add_Inquiry from "./components/Inquiry/Add_Inquiry";
 import viewInquiry from "./components/Inquiry/View_Inquiry";
 import editInquiry from "./components/Inquiry/Edit_Inquiry";
@@ -18,7 +18,7 @@ function App() {
   return (
     <Router>
     <div >
-      <Header/>
+      
       
       
 
@@ -31,6 +31,7 @@ function App() {
      <Route path="/payment/view/" exact component={PaymentView}/>
      <Route path="/payment/details/:id" exact component={PaymentDetails}/>
      <Route path="/payment/edit/:id" exact component={EditPayment}/>
+     <Route path ="/" exact component={HomePage}></Route>
      <Route path="/addInquiry" exact component={Add_Inquiry}/>
 <Route path="/viewInquiry" exact component={viewInquiry}/>
 <Route path="/editInquiry" exact component={editInquiry}/>  
