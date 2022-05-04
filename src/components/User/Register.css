@@ -1,0 +1,73 @@
+.RegjH1 h1 {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  color: #23345d;
+  font-size: 50px;
+}
+
+.framereg{
+  margin-left: 300px;
+  margin-top: 200px;
+}
+
+.RegjForm {
+  margin-top: 100px;
+}
+
+.form-label {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.btn {
+  align-items: center;
+}
+
+.btn1 {
+  background-color: #30a8a1;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.btn2 {
+  background-color: #23345d;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.btnLog{
+  width: 200px;
+  height: 54px;
+  border-radius: 30px;
+  border: none;
+  margin-left: 400px;
+  background-color:#23345d;
+  color: #fff;
+  font-size: 20px;
+}
+
+.btnReg{
+  width: 200px;
+  height: 54px;
+  border-radius: 30px;
+  border: none;
+  margin-left: 100px;
+  background-color:#23345d;
+  color: #fff;
+  font-size: 20px;
+}

@@ -1,4 +1,4 @@
-
+import React from 'react';
 import CreatePackage from './components/Travel_Packages/AddTravelPackage';
 import AllPackages from './components/Travel_Packages/TravelPackages';
 import PackageBooking from './components/Travel_Packages/PackageBooking';
