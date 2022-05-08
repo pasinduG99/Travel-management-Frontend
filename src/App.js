@@ -13,6 +13,9 @@ import AdminHome from  './components/Home/AdminHome';
 import Add_Inquiry from "./components/Inquiry/Add_Inquiry";
 import viewInquiry from "./components/Inquiry/View_Inquiry";
 import editInquiry from "./components/Inquiry/Edit_Inquiry";
+import userReg from "./components/User/User_Reg";
+import Login from "./components/User/Login";
+
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -38,9 +41,10 @@ function App() {
     
      <Route path="/adminhome" exact component={AdminHome}/>
      <Route path="/addInquiry" exact component={Add_Inquiry}/>
-<Route path="/viewInquiry" exact component={viewInquiry}/>
-<Route path="/editInquiry" exact component={editInquiry}/>  
-
+     <Route path="/viewInquiry" exact component={viewInquiry}/>
+     <Route path="/editInquiry/:id" exact component={editInquiry}/>  
+      <Route path="/login" exact component={Login}/> 
+      <Route path="/userreg" exact component={userReg}/>  
 
 </div>
 

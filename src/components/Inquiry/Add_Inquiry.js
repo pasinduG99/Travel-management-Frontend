@@ -1,87 +1,121 @@
-import React, { Component } from "react";
+import React from "react";
+import '../../Styles/AddInquiry.css'
 import axios from "axios";
-import './addInquiry.css';
-//import "bootstrap/dist/css/bootstrap.min.css";
 
-export default class AddInquiry extends Component {
-    constructor(props) {
-        super(props);
-        
-        this.state = {
-            name:"",
-            nic:"",
-            phone:"",
-            email:"",
-            inq:"" 
-        }
-        this.onChange = this.onChange.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
+import Form from 'react-bootstrap/Form'
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
+import Modal from 'react-bootstrap/Modal'
+
+export default class AddInquiry extends React.Component {
+
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+        show: false,
+        name:"",
+        nic:"",
+        phone:"",
+        email:"",
+        inq:"" 
     }
 
-    onChange(e) {
-        this.setState({[e.target.id]: e.target.value});
+    this.onChange = this.onChange.bind(this);
+    this.onSubmit = this.onSubmit.bind(this);
+
+    this.handleClose = this.handleClose.bind(this);
+    this.handleShow = this.handleShow.bind(this);
+  }
+
+  onChange(e) {
+    this.setState({[e.target.id]: e.target.value});
+  }
+
+  onSubmit = (e) => {
+    e.preventDefault();
+    this.handleClose();
+
+      const inquiry = {  
+        name : this.state.name, 
+        nic : this.state.nic,
+        phone : this.state.phone,
+        email : this.state.email,
+        inquiry : this.state.inq      
+      }
+      console.log(inquiry);
+
+       axios.post("http://localhost:8070/inquiry/add", inquiry)
+       .then(()=> { alert("Iquiry sent successfully..");})
+       .catch((err) => {alert(err)})
+       .finally(()=> window.location = "/viewInquiry");
     }
 
-    onSubmit = (e) => {
-        e.preventDefault();
+    clickCancel = () => {
+      window.location = "/viewInquiry"
+  };
 
-          const inquiry = {  
-            name : this.state.name, 
-            nic : this.state.nic,
-            phone : this.state.phone,
-            email : this.state.email,
-            inquiry : this.state.inq      
-          }
-          console.log(inquiry);
-
-          axios.post('http://localhost:8070/inquiry/add', inquiry)
-          .then(()=> { alert("Iquiry sent successfully..");})
-          .catch((err) => {alert(err)});
-
-          window.location = "/viewInquiry";
-    }
+    handleClose = () => {this.setState({show:false})};
+    handleShow = () => {this.setState({show:true})};
 
     render() {
         return (
-            <div className ="container, frameAdd"> 
-            <div className="RegjH1">
-              <h1>Inquiry</h1>
-              <h1>Inquiry Form</h1>
-                                     
-                    <form className = "RegjForm">
-                        <div class="form-group-doc">
-                            <label for="doctorid">Name : </label> <br/>
-                            <input type="text" class="form-control-doc" id="name" onChange={this.onChange} placeholder=""/>
-                        </div>
+            <>
+                <div>
+                    <br/>
 
-                        <div class="form-group-doc">
-                            <label for="doctorid">NIC : </label> <br/>
-                            <input type="text" class="form-control-doc" id="nic" onChange={this.onChange} placeholder=""/>
-                        </div>
+                    <Card className="card">                        
+                        <Card.Header className="text-center addHeader">Add Inquiry</Card.Header>
 
-                        <div class="form-group-doc">
-                            <label for="doctorid">Phone No : </label> <br/>
-                            <input type="text" class="form-control-doc" id="phone" onChange={this.onChange} placeholder=""/>
-                        </div>
+                        <Card.Body>
+                            <Form>
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Label>Name :</Form.Label>
+                                    <Form.Control type="text" id="name" onChange={this.onChange} placeholder="" />
+                                </Form.Group>
 
-                        <div class="form-group-doc">
-                            <label for="doctorid">Email : </label> <br/>
-                            <input type="text" class="form-control-doc" id="email" onChange={this.onChange} placeholder=""/>
-                        </div>
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Label>Email :</Form.Label>
+                                    <Form.Control type="email" id="email" onChange={this.onChange} placeholder="" />
+                                </Form.Group>
 
-                        <div class="form-group-doc">
-                            <label for="doctorid">Inquiry : </label> <br/>
-                            <input type="text" class="form-control-doc" id="inq" onChange={this.onChange} placeholder=""/>
-                        </div>
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Label>NIC :</Form.Label>
+                                    <Form.Control type="text" id="nic" onChange={this.onChange} placeholder="" />
+                                </Form.Group>
 
-                        <button type="submit" class="btn-primary-doc" onClick={this.onSubmit}>Submit</button>
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Label>Tel No :</Form.Label>
+                                    <Form.Control type="text" id="phone" onChange={this.onChange} placeholder="" />
+                                </Form.Group>
 
-                    </form>  
-                                  
-      </div>
-     </div> 
+                                <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Label>Inquiry :</Form.Label>
+                                    <Form.Control as="textarea" rows={5} id="inq" onChange={this.onChange} placeholder="" />
+                                </Form.Group>
+                            </Form>
+
+                            <Button variant="danger" className="btnAddCancel" onClick={this.clickCancel} >Cancel</Button>
+                            <Button type="submit" variant="success" className="btnAddSubmit" onClick={this.handleShow}>Send</Button>
+
+                        </Card.Body>
+                    </Card> <br/>
+
+                    <Modal show={this.state.show} onHide={this.handleClose} animation={true}>
+                      <Modal.Header>
+                        <Modal.Title>Inquiry Sending</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body> Click confirm to send Inquiry</Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="danger" onClick={this.handleClose}>  Cancel</Button>  
+                        <Button variant="success" onClick={this.onSubmit}>  Confirm  </Button>
+                      </Modal.Footer>
+                    </Modal>
+                    
+                </div>
+            </>
             
         )            
             
     }
-}
+};

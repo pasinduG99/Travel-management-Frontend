@@ -79,7 +79,7 @@ function Header() {
 
             <div id="login">
               <a
-                href="/register"
+                href="/userReg"
                 style={{ textDecoration: "none", color: "rgb(218, 213, 213)"}}
               >
                 {" "}

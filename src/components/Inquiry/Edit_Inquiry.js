@@ -1,9 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
 import axios from "axios";
-import './addInquiry.css';
-//import "bootstrap/dist/css/bootstrap.min.css";
 
-export default class EditInquiry extends Component {
+import Form from 'react-bootstrap/Form'
+import Card from 'react-bootstrap/Card'
+import Button from 'react-bootstrap/Button'
+import InputGroup from 'react-bootstrap/InputGroup'
+import Modal from 'react-bootstrap/Modal'
+
+
+
+export default class EditInquiry extends React.Component {
+
     constructor(props) {
         super(props);
         
@@ -15,86 +22,121 @@ export default class EditInquiry extends Component {
             email:"",
             inq:"" 
         }
-        this.onEdit = this.onEdit.bind(this);
     }
 
-    componentDidMount() {
+    componentDidMount(){
+        //console.log(this.props.match.params.id);
 
-        const ID = "625ab1c57c5b530cf1cefd3e";
+        axios.get(`http://localhost:8070/inquiry/view/${this.props.match.params.id}`)
+        .then((res) => { this.setState({ 
+            inquiry: res.data,
+            id : res.data._id,
+            name : res.data.name,
+            email : res.data.email,
+            phone : res.data.phone,
+            nic : res.data.nic,
+            inq : res.data.inquiry
+         })})
+        .catch((err) => console.log(err.message))
 
-        console.log(ID);
+      //  console.log(this.state.inquiry);
+    }
 
-        axios.get(`http://localhost:8070/inquiry/view`)
-        .then((res) => {
-            this.setState({
-                inquiry : res.data
-            })
-            console.log(this.state.inquiry);
-        }).catch((err) => console.log(err));       
+    clickCancel = () => {
+        window.location = "/viewInquiry"
     };
 
-    onChange = (e) => {
+    handleClose = () => {this.setState({show:false})};
+    handleShow = () => {this.setState({show:true})};
+
+    onChange(e) {
         this.setState({[e.target.id]: e.target.value});
     }
+    
 
-    onEdit(){
-        const inquiry = {  
+    onSubmit = (e) => {
+        e.preventDefault();
+        this.handleClose();
+    
+          const inquiry = {  
             name : this.state.name, 
             nic : this.state.nic,
             phone : this.state.phone,
             email : this.state.email,
-            inq : this.state.inq    
+            inquiry : this.state.inq      
+          }
+          console.log(inquiry);
+    
+           axios.put(`http://localhost:8070/inquiry/edit/${this.props.match.params.id}`, inquiry)
+           .then((res)=> {alert(res.data)})
+           .catch((err) => console.log(err))
+           .finally(()=> window.location = "/viewInquiry");
         }
 
-        axios
-        .put(`http://localhost:3001/inquiry/edit/${this.props.match.params.id}`, inquiry)
-        .then(() => alert("Inquiry Updated"))
-        .catch((err) =>console.log(err));
-
-        window.location = "/viewInquiry";
-    }
-
     render() {
-        return (
-            <div className ="container"> 
-            <div className="RegjH1">
-              <h1>Inquiry</h1>
-              <h1>Edit Inquiry Form</h1>
-                                     
-                    <form className = "RegjForm">
-                        <div class="form-group-doc">
-                            <label for="doctorid">Name : </label> <br/>
-                            <input type="text" class="form-control-doc" id="name" onChange={this.onChange} placeholder=""/>
-                        </div>
+        return(
 
-                        <div class="form-group-doc">
-                            <label for="doctorid">NIC : </label> <br/>
-                            <input type="text" class="form-control-doc" id="nic" onChange={this.onChange} placeholder=""/>
-                        </div>
+                <div>
+                    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"></link>
+                   
+                    <h1>Edit Inquiry</h1>
+                    
+                    
+                    <Card className="card">                        
+                        <Card.Header className="text-center addHeader">Edit Inquiry</Card.Header>
+                        <Card.Body>                           
+                            <Form>
+                                <InputGroup className="mb-3">
+                                    <InputGroup.Text id="basic-addon1"><i class="fa fa-id-badge"></i></InputGroup.Text>
+                                    <Form.Control type="text" id="id" placeholder={this.state.id}  readOnly/>
+                                </InputGroup>
 
-                        <div class="form-group-doc">
-                            <label for="doctorid">Phone No : </label> <br/>
-                            <input type="text" class="form-control-doc" id="phone" onChange={this.onChange} placeholder=""/>
-                        </div>
+                                <InputGroup className="mb-3">
+                                    <InputGroup.Text id="basic-addon1"><i class="fa fa-user"></i></InputGroup.Text>
+                                    <Form.Control type="text" id="name" onChange={(e) => this.onChange(e)} placeholder={this.state.name}  />
+                                </InputGroup>
 
-                        <div class="form-group-doc">
-                            <label for="doctorid">Email : </label> <br/>
-                            <input type="text" class="form-control-doc" id="email" onChange={this.onChange} placeholder=""/>
-                        </div>
+                                <InputGroup className="mb-3">
+                                    <InputGroup.Text id="basic-addon1"><i class="fa fa-envelope "></i></InputGroup.Text>
+                                    <Form.Control type="text" id="email" onChange={(e) => this.onChange(e)} placeholder={this.state.email} />
+                                </InputGroup>
 
-                        <div class="form-group-doc">
-                            <label for="doctorid">Inquiry : </label> <br/>
-                            <input type="text" class="form-control-doc" id="inq" onChange={this.onChange} placeholder=""/>
-                        </div>
+                                <InputGroup className="mb-3">
+                                    <InputGroup.Text id="basic-addon1"><i class="fa fa-id-card"></i></InputGroup.Text>
+                                    <Form.Control type="text" id="nic" onChange={(e) => this.onChange(e)} placeholder={this.state.nic} />
+                                </InputGroup>
 
-                        <button type="submit" class="btn-primary-doc" onClick={this.onEdit}>Update</button>
+                                <InputGroup className="mb-3">
+                                    <InputGroup.Text id="basic-addon1"><i class="fa fa-phone"></i></InputGroup.Text>
+                                    <Form.Control type="text" id="phone" onChange={(e) => this.onChange(e)} placeholder={this.state.phone} />
+                                </InputGroup>
 
-                    </form>  
-                                  
-      </div>
-     </div> 
-            
-        )            
-            
-    }
+                                <InputGroup className="mb-3">
+                                    <InputGroup.Text id="basic-addon1"><i class="fa fa-commenting "></i></InputGroup.Text>
+                                    <Form.Control as="textarea" rows={5} id="inq" onChange={(e) => this.onChange(e)} placeholder={this.state.inq} />
+                                </InputGroup>
+                            </Form>
+                       
+
+                            <Button variant="danger" className="btnAddCancel" onClick={this.clickCancel} >Cancel</Button>
+                            <Button type="submit" variant="success" className="btnAddSubmit" onClick={this.handleShow}>Update</Button>
+
+                        </Card.Body>    
+                    </Card> <br/>
+
+                    <Modal show={this.state.show} onHide={this.handleClose} animation={true}>
+                      <Modal.Header>
+                        <Modal.Title>Inquiry Sending</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body> Click confirm to update your Inquiry</Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="danger" onClick={this.handleClose}>  Cancel</Button>  
+                        <Button variant="success" onClick={this.onSubmit}>  Confirm  </Button>
+                      </Modal.Footer>
+                    </Modal>
+                   
+                </div>
+                
+        );
+    };
 }

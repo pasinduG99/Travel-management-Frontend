@@ -1,12 +1,22 @@
-import React, { Component } from "react";
+import React from "react";
 import axios from "axios";
-//import "bootstrap/dist/css/bootstrap.min.css";
-import './viewInquiry.css';
+import '../../Styles/ViewInquiry.css';
 
-export default class Inquiry extends Component {
+import Button from 'react-bootstrap/Button';
+import Table from 'react-bootstrap/Table';
+import Modal from 'react-bootstrap/Modal';
+
+
+
+export default class ViewInquiry extends React.Component {
+
     constructor(props) {
         super(props);
-        this.state = {inquiry:[]}        
+        this.state = {
+            inquiry:[],
+            show: false,
+            Id:""
+        }        
     };
 
     componentDidMount() {
@@ -20,63 +30,72 @@ export default class Inquiry extends Component {
         }).catch((err) => console.log(err));       
     };
 
-    navDelete = (id) =>{
+    navDelete = (id) => {
+        this.handleClose();
+
         axios.delete(`http://localhost:8070/inquiry/delete/${id}`)
-        .then((res) => alert("Appointment deleted successfully"))
-        .catch((err) => console.log(err));
-        window.location = "/viewInquiry";
+        .then(() => alert("Inquiry deleted successfully"))
+        .catch((err) => console.log(err))
+        .finally(() => window.location = "/viewInquiry");
     }
 
-    navEdit = (id) =>{
+    goAddInquiry = () => {
+        window.location = "/addInquiry";
+    };
+
+    navEdit = (id) => {
         window.location = `/editInquiry/${id}`;
-    }
+    };
 
-    navInsert(){
-        window.location = `/addInquiry`;
-    }
+    handleClose = () => {this.setState({show:false})};
+    handleShow = (id) => {this.setState({show:true, Id:id})};
 
     render() {
-        return ( 
-            <div className="frameView">
-            <div className="DocContainer"> 
-                <div className="container"> 
+        return (
+            <>
+                <div> <br/>
+                    {/* <h1>View Inquiries</h1> */}
 
-                <button className="inqaddbtn" onClick = {()=>{this.navInsert()}}> Add Inquiry </button>
-                <h1> View Inquiries </h1>
-                <table class="table table-success table-striped">
+                    <Button className="btnInqAdd"variant="secondary" size="lg" onClick={this.goAddInquiry}>  Create New Inquiry </Button> <br/> <br/>
 
-                <thead className="thead-light">
-                    <tr>
-                        <th scope="col"> Name </th>
-                        <th scope="col"> NIC </th>
-                        <th scope="col"> Phone </th>
-                        <th scope="col"> Email </th>
-                        <th scope="col"> Inquiry </th>
-                        <th scope="col"> Remove </th>
-                        <th scope="col"> Edit </th>
-
-                    </tr>
-                </thead>
-             <tbody>
-                 { this.state.inquiry.map((item,key) =>(
-                 <tr>
-                    <td> {item.name} </td>
-                    <td> {item.nic} </td>
-                    <td> {item.phone} </td> 
-                    <td> {item.email} </td>
-                    <td> {item.inquiry}</td>
-                    <td> <button onClick = {()=>{this.navDelete(item._id)}} class="btndoc1"> Delete </button></td>
-                    <td> <button onClick = {()=>{this.navEdit(item._id)}} class="btndoc2" > Update </button></td>
-                    </tr>
+                    <Table bordered hover size="lg" className="table-inq-view">
+                        <thead  className="table-secondary">
+                            <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th colSpan={2}>Inquiry Details</th>
+                            <th></th>
+                            <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        { this.state.inquiry.map((item,key) =>(
+                            <tr>
+                                <td> {item.name} </td>
+                                <td> {item.email} </td>
+                                <td colSpan={2}> {item.inquiry}</td>
+                                <td className="tdInqView"> <Button variant="danger" onClick={() => this.handleShow(item._id)} class="btnInqDel"> Delete </Button></td>
+                                <td className="tdInqView"> <Button variant="warning" onClick={()=>{this.navEdit(item._id)}} class="btnInqUp" > Update </Button></td>
+                            </tr>
                             ))}
-             </tbody>
-                
-                </table>
-                
+                        </tbody>
+                    </Table>
+
+                    <Modal show={this.state.show} onHide={this.handleClose} animation={true}>
+                      <Modal.Header>
+                        <Modal.Title>Inquiry Deleting</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body> Click Delete to confirm delete Inquiry</Modal.Body>
+                      <Modal.Footer>
+                        <Button variant="secondary" onClick={this.handleClose}>  Cancel </Button>  
+                        <Button variant="danger" onClick = {()=>{this.navDelete(this.state.Id)}}> Delete </Button>
+                      </Modal.Footer>
+                    </Modal>
+                    
                 </div>
-           </div>
-           </div>
-           
-         )   
+                
+            </>
+            
+        )
     }
 }
