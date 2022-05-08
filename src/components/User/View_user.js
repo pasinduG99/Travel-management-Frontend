@@ -44,7 +44,7 @@ export default class viewUser extends React.Component {
     };
 
     navEdit = (id) => {
-        window.location = `/edituserreg/${id}`;
+        window.location = `/Edituser/${id}`;
     };
 
     handleClose = () => {this.setState({show:false})};
