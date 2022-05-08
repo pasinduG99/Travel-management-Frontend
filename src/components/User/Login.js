@@ -33,7 +33,7 @@ export default class Login extends React.Component {
         axios.post("http://localhost:8070/user/log", user)
         .then((res)=> { alert(res.data.message);})
         .catch((err) => {alert(err)})
-        .finally((res)=> console.log(res.data.data));
+        .finally((res)=> window.location="/Viewuser");
     }
 
     render() {

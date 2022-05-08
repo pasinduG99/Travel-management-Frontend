@@ -15,6 +15,7 @@ import viewInquiry from "./components/Inquiry/View_Inquiry";
 import editInquiry from "./components/Inquiry/Edit_Inquiry";
 import userReg from "./components/User/User_Reg";
 import Login from "./components/User/Login";
+import ViewUser from "./components/User/View_user";
 
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import Header from './components/Header';
@@ -45,6 +46,8 @@ function App() {
      <Route path="/editInquiry/:id" exact component={editInquiry}/>  
       <Route path="/login" exact component={Login}/> 
       <Route path="/userreg" exact component={userReg}/>  
+      <Route path="/Viewuser" exact component={ViewUser}/>  
+       
 
 </div>
 
