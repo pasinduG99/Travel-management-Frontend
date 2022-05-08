@@ -2,6 +2,13 @@ import React from 'react';
 import CreatePackage from './components/Travel_Packages/AddTravelPackage';
 import AllPackages from './components/Travel_Packages/TravelPackages';
 import PackageBooking from './components/Travel_Packages/PackageBooking';
+import PackageDetailsAdmin from './components/Travel_Packages/TravelPackageDetailsAdmin';
+import PackageDetails from './components/Travel_Packages/TravelPackageDetails';
+import AllPackagesAdmin from './components/Travel_Packages/TravelPackagesAdmin';
+import EditPackage from './components/Travel_Packages/EditTravelPackage';
+import DeletePackage from './components/Travel_Packages/DeleteTravelPackage'
+import AllBooking from './components/Travel_Packages/BookingAllDetails';
+import EditTPackage from './components/Travel_Packages/EditPackage2';
 import PayForTP from './components/Payment/PayForTP';
 import PaymentConfirm from './components/Payment/PaymentComplete';
 import PaymentView from './components/Payment/PayView';
@@ -33,6 +40,13 @@ function App() {
      <Route path="/travelpackage/admin/add" exact component ={CreatePackage}></Route>
      <Route path="/travelpackages" exact component = {AllPackages}></Route>
      <Route path="/bookingpackage/:id" exact component = {PackageBooking}></Route>
+     <Route path="/travelpackages/admin" exact component = {AllPackagesAdmin}></Route>
+     <Route path="/travelpackage/admin/edit/:id" exact component ={EditPackage}></Route>
+     <Route path="/travelpackage/admin/delete/:id" exact component = {DeletePackage}></Route>
+     <Route path="/travelpackages/travelpackage/:id" exact component ={PackageDetails}></Route>
+     <Route path="/travelpackages/travelpackage/admin/:id" exact component ={PackageDetailsAdmin}></Route>
+     <Route path="/allbooking" exact component = {AllBooking}></Route>
+     <Route path="/edittpackage/:id" component= {EditTPackage}></Route>
      <Route path="/payment/add-package/:id" exact component={PayForTP}/>
      <Route path="/confirm/payment/" exact component={PaymentConfirm}/>
      <Route path="/payment/view/" exact component={PaymentView}/>
